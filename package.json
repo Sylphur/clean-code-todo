@@ -12,11 +12,11 @@
     "prepare": "husky"
   },
   "lint-staged": {
-  "*.{js,mjs,cjs}": [
-    "eslint --fix",
-    "prettier --write"
-  ]
-},
+    "*.{js,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylphur/clean-code-todo.git"
