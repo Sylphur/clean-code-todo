@@ -13,7 +13,7 @@ const incompleteTaskHolder = document.getElementById('incompleteTasks'); //ul of
 const completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
 
 //New task list item
-const createNewTaskElement = function (taskString) {
+const createNewTaskElement = function (taskTitle) {
   const listItem = document.createElement('li');
 
   //input (checkbox)
@@ -29,7 +29,7 @@ const createNewTaskElement = function (taskString) {
   const deleteButton = document.createElement('button'); //delete button
   const deleteButtonImg = document.createElement('img'); //delete button image
 
-  label.innerText = taskString;
+  label.innerText = taskTitle;
   label.className = 'task';
 
   //Each elements, needs appending
@@ -72,17 +72,17 @@ const editTask = function () {
 
   const editInput = listItem.querySelector('input[type=text]');
   const label = listItem.querySelector('label');
-  const editBtn = listItem.querySelector('.edit');
-  const containsClass = listItem.classList.contains('editMode');
+  const editButton = listItem.querySelector('.edit');
+  const isEditMode = listItem.classList.contains('editMode');
   //If class of the parent is .editmode
-  if (containsClass) {
+  if (isEditMode) {
     //switch to .editmode
     //label becomes the inputs value.
     label.innerText = editInput.value;
-    editBtn.innerText = 'Edit';
+    editButton.innerText = 'Edit';
   } else {
     editInput.value = label.innerText;
-    editBtn.innerText = 'Save';
+    editButton.innerText = 'Save';
   }
 
   //toggle .editmode on the parent.
@@ -115,7 +115,7 @@ const taskIncomplete = function () {
 //Set the click handler to the addTask function.
 addButton.addEventListener('click', addTask);
 
-const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
+const bindTaskEvents = function (taskListItem, onStatusChange) {
   //select ListItems children
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
   const editButton = taskListItem.querySelector('button.edit');
@@ -126,7 +126,7 @@ const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   //Bind deleteTask to delete button.
   deleteButton.addEventListener('click', deleteTask);
   //Bind taskCompleted to checkBoxEventHandler.
-  checkBox.onchange = checkBoxEventHandler;
+  checkBox.onchange = onStatusChange;
 };
 
 //cycle over incompleteTaskHolder ul list items
